@@ -6,7 +6,9 @@ const app = express();
 
 const MongoClient = require('mongodb').MongoClient
 
-const connectionString = 'mongodb+srv://Andrew:Chang@cluster0.jqbcy.mongodb.net/?retryWrites=true&w=majority'
+// const connectionString = 'mongodb+srv://Andrew:Chang@cluster0.jqbcy.mongodb.net/?retryWrites=true&w=majority'
+
+const connectionString = `mongodb+srv://${process.env.USER}:${process.env.PW}@cluster0.bzzkg.mongodb.net/?retryWrites=true&w=majority`;
 
 app.use(bodyParser.urlencoded({ extended: true }))
 
