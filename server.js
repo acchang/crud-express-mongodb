@@ -9,14 +9,22 @@ const connectionString = `mongodb+srv://${process.env.USERNAME}:${process.env.PW
 
 // All your handlers here...
 
-MongoClient.connect(connectionString, {
-    useUnifiedTopology: true
-  }, (err, client) => {
-  // 'mongodb+srv://NAME:PASS@cluster0.jqbcy.mongodb.net/?retryWrites=true&w=majority'
 
-    if (err) return console.error(err)
+MongoClient.connect(connectionString, { useUnifiedTopology: true })
+  .then(client => {
     console.log('Connected to Database')
   })
+  .catch(error => console.error(error))
+
+
+// MongoClient.connect(connectionString, {
+//     useUnifiedTopology: true
+//   }, (err, client) => {
+//   // 'mongodb+srv://NAME:PASS@cluster0.jqbcy.mongodb.net/?retryWrites=true&w=majority'
+
+//     if (err) return console.error(err)
+//     console.log('Connected to Database')
+//   })
 
 // MongoClient.connect(/* ... */)
 //   .then(client => {
