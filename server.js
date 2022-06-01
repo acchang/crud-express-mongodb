@@ -1,32 +1,51 @@
-console.log('May Node be with you')
-
 const express = require('express');
 const bodyParser= require('body-parser');
 const app = express();
-
 const MongoClient = require('mongodb').MongoClient
-
-// const connectionString = 'mongodb+srv://Andrew:Chang@cluster0.jqbcy.mongodb.net/?retryWrites=true&w=majority'
+const connectionString = 'mongodb+srv://Andrew:Chang@cluster0.jqbcy.mongodb.net/?retryWrites=true&w=majority'
 
 // from https://discord.com/channels/735923219315425401/980280502244212786/980298549889736744
+// const dotenv = require('dotenv') // .env file
+// dotenv.config() // using .env
+// const connectionString = `mongodb+srv://${process.env.USER}:${process.env.PW}@cluster0.jqbcy.mongodb.net/?retryWrites=true&w=majority`;
+// gets:
+// ReferenceError: env is not defined
+//     at Object.<anonymous> (/Users/andrewchang/the_odin_project/crud-express-mongodb/server.js:15:43)
+// may be issue with npm
 
-const dotenv = require('dotenv') // .env file
-dotenv.config() // using .env
-const connectionString = `mongodb+srv://${process.env.USER}:${process.env.PW}@cluster0.bzzkg.mongodb.net/?retryWrites=true&w=majority`;
-
-app.use(bodyParser.urlencoded({ extended: true }))
 
 // All your handlers here...
 
+// MongoClient.connect(connectionString, {
+//     useUnifiedTopology: true
+//   }, (err, client) => {
+//     // 'mongodb+srv://Andrew:Chang@cluster0.jqbcy.mongodb.net/?retryWrites=true&w=majority'
 
-MongoClient.connect(connectionString, {
-    useUnifiedTopology: true
-  }, (err, client) => {
-    'mongodb+srv://Andrew:Chang@cluster0.jqbcy.mongodb.net/?retryWrites=true&w=majority'
+//     if (err) return console.error(err)
+//     console.log('Connected to Database')
+//   })
 
-    if (err) return console.error(err)
-    console.log('Connected to Database')
+
+MongoClient.connect(/* ... */)
+  .then(client => {
+    // ...
+    const db = client.db('star-wars-quotes')
+    app.use(/* ... */)
+    app.get(/* ... */)
+    app.post(/* ... */)
+    app.listen(/* ... */)
   })
+  .catch(console.error)
+
+  app.post('/quotes', (req, res) => {
+    quotesCollection.insertOne(req.body)
+      .then(result => {
+        console.log(result)
+      })
+      .catch(error => console.error(error))
+  })
+
+
 
 
 // app.get('/', (req, res) => {
