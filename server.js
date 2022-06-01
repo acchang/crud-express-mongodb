@@ -2,7 +2,7 @@ const express = require('express');
 const bodyParser= require('body-parser');
 const app = express();
 const MongoClient = require('mongodb').MongoClient
-const connectionString = 'mongodb+srv://Andrew:Chang@cluster0.jqbcy.mongodb.net/?retryWrites=true&w=majority'
+const connectionString = 'mongodb+srv://NAME:PASS@cluster0.jqbcy.mongodb.net/?retryWrites=true&w=majority'
 
 // from https://discord.com/channels/735923219315425401/980280502244212786/980298549889736744
 // const dotenv = require('dotenv') // .env file
@@ -13,13 +13,12 @@ const connectionString = 'mongodb+srv://Andrew:Chang@cluster0.jqbcy.mongodb.net/
 //     at Object.<anonymous> (/Users/andrewchang/the_odin_project/crud-express-mongodb/server.js:15:43)
 // may be issue with npm
 
-
 // All your handlers here...
 
 // MongoClient.connect(connectionString, {
 //     useUnifiedTopology: true
 //   }, (err, client) => {
-//     // 'mongodb+srv://Andrew:Chang@cluster0.jqbcy.mongodb.net/?retryWrites=true&w=majority'
+//     // 'mongodb+srv://NAME:PASS@cluster0.jqbcy.mongodb.net/?retryWrites=true&w=majority'
 
 //     if (err) return console.error(err)
 //     console.log('Connected to Database')
