@@ -18,16 +18,21 @@ MongoClient.connect(connectionString, { useUnifiedTopology: true })
     app.use(bodyParser.urlencoded({ extended: true }))
 
     app.get('/', (req, res) => {
-      const cursor = db.collection('quotes').find()
-      console.log(cursor)
-
-
       db.collection('quotes').find().toArray()
-        .then(results => {
-          console.log(results)
-    })
-    .catch(error => console.error(error))
+      .then(results => {
+        console.log(results)
+      })
+      .catch(error => console.error(error))
+      
 
+    //   const cursor = db.collection('quotes').find()
+    //   console.log(cursor)
+
+    //   db.collection('quotes').find().toArray()
+    //     .then(results => {
+    //       console.log(results)
+    // })
+    // .catch(error => console.error(error))
 
       res.sendFile(`/Users/andrewchang/the_odin_project/crud-express-mongodb/index.html`)
       })
