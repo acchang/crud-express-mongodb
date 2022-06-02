@@ -23,8 +23,8 @@ MongoClient.connect(connectionString, { useUnifiedTopology: true })
         console.log(results)
       })
       .catch(error => console.error(error))
-
-      // res.sendFile(`/Users/andrewchang/the_odin_project/crud-express-mongodb/index.html`)
+      
+      res.sendFile(`/Users/andrewchang/the_odin_project/crud-express-mongodb/index.html`)
       })
       
     app.post('/quotes', (req, res) => {
