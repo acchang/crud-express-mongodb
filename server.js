@@ -13,47 +13,56 @@ const connectionString = `mongodb+srv://${process.env.USERNAME}:${process.env.PW
 MongoClient.connect(connectionString, { useUnifiedTopology: true })
   .then(client => {
     console.log('Connected to Database')
+    const db = client.db('star-wars-quotes')
+    const quotesCollection = db.collection('quotes')
+    app.use(bodyParser.urlencoded({ extended: true }))
+
+    app.get('/', (req, res) => {
+      const cursor = db.collection('quotes').find()
+      console.log(cursor)
+
+
+      db.collection('quotes').find().toArray()
+        .then(results => {
+          console.log(results)
+    })
+    .catch(error => console.error(error))
+
+
+      res.sendFile(`/Users/andrewchang/the_odin_project/crud-express-mongodb/index.html`)
+      })
+      
+    app.post('/quotes', (req, res) => {
+      quotesCollection.insertOne(req.body)
+        .then(result => {
+          res.redirect('/')
+          // console.log(result)
+        })
+        .catch(error => console.error(error))
+    })
+
+    app.listen(3000, function() {
+      console.log('listening on 3000')
+    })
+
   })
-  .catch(error => console.error(error))
+  .catch(console.error)
 
-
+// Callback style
 // MongoClient.connect(connectionString, {
 //     useUnifiedTopology: true
 //   }, (err, client) => {
 //   // 'mongodb+srv://NAME:PASS@cluster0.jqbcy.mongodb.net/?retryWrites=true&w=majority'
-
 //     if (err) return console.error(err)
 //     console.log('Connected to Database')
 //   })
 
-// MongoClient.connect(/* ... */)
-//   .then(client => {
-//     // ...
-//     const db = client.db('star-wars-quotes')
-//     app.use(/* ... */)
-//     app.get(/* ... */)
-//     app.post(/* ... */)
-//     app.listen(/* ... */)
-//   })
-//   .catch(console.error)
-
-//   app.post('/quotes', (req, res) => {
-//     quotesCollection.insertOne(req.body)
-//       .then(result => {
-//         console.log(result)
-//       })
-//       .catch(error => console.error(error))
-//   })
 
 
-app.listen(3000, function() {
-    console.log('listening on 3000')
-  })
+// app.get('/', (req, res) => {
+//     res.sendFile(`/Users/andrewchang/the_odin_project/crud-express-mongodb/index.html`)
+//     })
 
-app.get('/', (req, res) => {
-    res.sendFile(`/Users/andrewchang/the_odin_project/crud-express-mongodb/index.html`)
-    })
-
-app.post('/quotes', (req, res) => {
-    console.log(req.body)
-    })
+// app.post('/quotes', (req, res) => {
+//     console.log(req.body)
+//     })
