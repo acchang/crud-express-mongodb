@@ -23,18 +23,8 @@ MongoClient.connect(connectionString, { useUnifiedTopology: true })
         console.log(results)
       })
       .catch(error => console.error(error))
-      
 
-    //   const cursor = db.collection('quotes').find()
-    //   console.log(cursor)
-
-    //   db.collection('quotes').find().toArray()
-    //     .then(results => {
-    //       console.log(results)
-    // })
-    // .catch(error => console.error(error))
-
-      res.sendFile(`/Users/andrewchang/the_odin_project/crud-express-mongodb/index.html`)
+      // res.sendFile(`/Users/andrewchang/the_odin_project/crud-express-mongodb/index.html`)
       })
       
     app.post('/quotes', (req, res) => {
@@ -52,22 +42,3 @@ MongoClient.connect(connectionString, { useUnifiedTopology: true })
 
   })
   .catch(console.error)
-
-// Callback style
-// MongoClient.connect(connectionString, {
-//     useUnifiedTopology: true
-//   }, (err, client) => {
-//   // 'mongodb+srv://NAME:PASS@cluster0.jqbcy.mongodb.net/?retryWrites=true&w=majority'
-//     if (err) return console.error(err)
-//     console.log('Connected to Database')
-//   })
-
-
-
-// app.get('/', (req, res) => {
-//     res.sendFile(`/Users/andrewchang/the_odin_project/crud-express-mongodb/index.html`)
-//     })
-
-// app.post('/quotes', (req, res) => {
-//     console.log(req.body)
-//     })
