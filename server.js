@@ -17,6 +17,27 @@ MongoClient.connect(connectionString, { useUnifiedTopology: true })
 
     app.use(bodyParser.urlencoded({ extended: true }))
     app.use(express.static('public'))
+    app.use(bodyParser.json())
+
+    app.put('/quotes', (req, res) => {
+      quotesCollection.findOneAndUpdate(
+        { name: 'yoda' },
+        {
+          $set: {
+            name: req.body.name,
+            quote: req.body.quote
+          }
+        },
+        {
+          upsert: true
+        }
+      )
+        .then(result => {
+          // console.log(result)
+          res.json('Success')
+        })
+        .catch(error => console.error(error))
+    })
 
     app.get('/', (req, res) => {
       db.collection('quotes').find().toArray()
@@ -31,7 +52,6 @@ MongoClient.connect(connectionString, { useUnifiedTopology: true })
       quotesCollection.insertOne(req.body)
         .then(result => {
           res.redirect('/')
-          // console.log(result)
         })
         .catch(error => console.error(error))
     })
@@ -42,3 +62,7 @@ MongoClient.connect(connectionString, { useUnifiedTopology: true })
 
   })
   .catch(console.error)
+
+
+
+
