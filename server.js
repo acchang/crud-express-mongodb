@@ -1,7 +1,7 @@
 const express = require('express');
 const bodyParser= require('body-parser');
-const app = express();
 const MongoClient = require('mongodb').MongoClient
+const app = express();
 
 const dotenv = require('dotenv') // .env file
 dotenv.config() // using .env
@@ -14,10 +14,27 @@ MongoClient.connect(connectionString, { useUnifiedTopology: true })
     const quotesCollection = db.collection('quotes')
 
     app.set('view engine', 'ejs')
-
     app.use(bodyParser.urlencoded({ extended: true }))
     app.use(express.static('public'))
     app.use(bodyParser.json())
+
+
+    app.get('/', (req, res) => {
+      db.collection('quotes').find().toArray()
+      .then(results => {
+        // console.log(results)
+        res.render('index.ejs', { quotes: results })
+      })
+      .catch(error => console.error(error))
+    })
+
+    app.post('/quotes', (req, res) => {
+      quotesCollection.insertOne(req.body)
+        .then(result => {
+          res.redirect('/')
+        })
+        .catch(error => console.error(error))
+    })
 
     app.put('/quotes', (req, res) => {
       quotesCollection.findOneAndUpdate(
@@ -39,27 +56,6 @@ MongoClient.connect(connectionString, { useUnifiedTopology: true })
         .catch(error => console.error(error))
     })
 
-    app.get('/', (req, res) => {
-      db.collection('quotes').find().toArray()
-      .then(results => {
-        // console.log(results)
-        res.render('index.ejs', { quotes: results })
-      })
-      .catch(error => console.error(error))
-    })
-      
-    app.post('/quotes', (req, res) => {
-      quotesCollection.insertOne(req.body)
-        .then(result => {
-          res.redirect('/')
-        })
-        .catch(error => console.error(error))
-    })
-
-    app.listen(3000, function() {
-      console.log('listening on 3000')
-    })
-
     app.delete('/quotes', (req, res) => {
       quotesCollection.deleteOne(
         { name: req.body.name },
@@ -71,6 +67,10 @@ MongoClient.connect(connectionString, { useUnifiedTopology: true })
           res.json(`Deleted Darth Vadar's quote`)
         })
         .catch(error => console.error(error))
+    })
+
+    app.listen(3000, function() {
+      console.log('listening on 3000')
     })
 
   })
