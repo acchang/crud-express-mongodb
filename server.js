@@ -5,9 +5,7 @@ const app = express();
 
 const dotenv = require('dotenv') // .env file
 dotenv.config() // using .env
-// const connectionString = `mongodb+srv://${process.env.USERNAME}:${process.env.PW}@cluster0.jqbcy.mongodb.net/?retryWrites=true&w=majority`;
-
-const connectionString = `mongodb+srv://Andrew:Chang@cluster0.jqbcy.mongodb.net/?retryWrites=true&w=majority`;
+const connectionString = `mongodb+srv://${process.env.USERNAME}:${process.env.PW}@cluster0.jqbcy.mongodb.net/?retryWrites=true&w=majority`;
 
 
 
