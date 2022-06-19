@@ -41,55 +41,55 @@ app.use(express.json())
 // what is the difference between express and bodyparser here?
 
 
-app.get('/', (req, res) => {
-  db.collection('quotes').find().toArray()
-  .then(results => {
-    // console.log(results)
-    res.render('index.ejs', { quotes: results })
-  })
-  .catch(error => console.error(error))
-})
+// app.get('/', (req, res) => {
+//   db.collection('quotes').find().toArray()
+//   .then(results => {
+//     // console.log(results)
+//     res.render('index.ejs', { quotes: results })
+//   })
+//   .catch(error => console.error(error))
+// })
 
-app.post('/quotes', (req, res) => {
-  db.collection('quotes').insertOne(req.body)
-    .then(result => {
-      res.redirect('/')
-    })
-    .catch(error => console.error(error))
-})
+// app.post('/quotes', (req, res) => {
+//   db.collection('quotes').insertOne(req.body)
+//     .then(result => {
+//       res.redirect('/')
+//     })
+//     .catch(error => console.error(error))
+// })
 
-app.put('/quotes', (req, res) => {
-  db.collection('quotes').findOneAndUpdate(
-    { name: 'yoda' },
-    {
-      $set: {
-        name: req.body.name,
-        quote: req.body.quote
-      }
-    },
-    {
-      upsert: true
-    }
-  )
-    .then(result => {
-      // console.log(result)
-      res.json('Success')
-    })
-    .catch(error => console.error(error))
-})
+// app.put('/quotes', (req, res) => {
+//   db.collection('quotes').findOneAndUpdate(
+//     { name: 'yoda' },
+//     {
+//       $set: {
+//         name: req.body.name,
+//         quote: req.body.quote
+//       }
+//     },
+//     {
+//       upsert: true
+//     }
+//   )
+//     .then(result => {
+//       // console.log(result)
+//       res.json('Success')
+//     })
+//     .catch(error => console.error(error))
+// })
 
-app.delete('/quotes', (req, res) => {
-  db.collection('quotes').deleteOne(
-    { name: req.body.name },
-    )
-    .then(result => {
-      if (result.deletedCount === 0) {
-        return res.json('No quote to delete')
-      }
-      res.json(`Deleted Darth Vadar's quote`)
-    })
-    .catch(error => console.error(error))
-})
+// app.delete('/quotes', (req, res) => {
+//   db.collection('quotes').deleteOne(
+//     { name: req.body.name },
+//     )
+//     .then(result => {
+//       if (result.deletedCount === 0) {
+//         return res.json('No quote to delete')
+//       }
+//       res.json(`Deleted Darth Vadar's quote`)
+//     })
+//     .catch(error => console.error(error))
+// })
 
 
 app.listen(process.env.PORT || PORT, ()=>{
