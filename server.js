@@ -41,14 +41,14 @@ app.use(express.json())
 // what is the difference between express and bodyparser here?
 
 
-// app.get('/', (req, res) => {
-//   db.collection('quotes').find().toArray()
-//   .then(results => {
-//     // console.log(results)
-//     res.render('index.ejs', { quotes: results })
-//   })
-//   .catch(error => console.error(error))
-// })
+app.get('/', (req, res) => {
+  db.collection('quotes').find().toArray()
+  .then(results => {
+    // console.log(results)
+    res.render('index.ejs', { quotes: results })
+  })
+  .catch(error => console.error(error))
+})
 
 // app.post('/quotes', (req, res) => {
 //   db.collection('quotes').insertOne(req.body)
